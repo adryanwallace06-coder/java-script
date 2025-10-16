@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titoburger - Delivery de Hamburger e Refrigerante</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <h1 class="brand">TitoBurger</h1>
+            <nav class="nav">
+                <a href="#">Cardápio</a>
+                <a href="#">Carrinho</a>
+                <a href="#">Checkout</a>
+                <a href="#">Contato</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container main">
+        <section class="hero" aria-label="Promoções">
+            <div class="carousel" id="carousel" aria-roledescription="carousel">
+                <div class="carousel__track" id="carousel__track">
+                    <div class="carousel__slide is-active">
+                        <img src="images/banner_1.jpg" alt="banner 1">
+                    </div>
+                    <div>
+                        <img src="images/banner_2.jpg" alt="banner 2">
+                    </div>
+                    <div>
+                        <img src="images/banner_3.jpg" alt="banner 3">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="menu" class="class" aria-labelledby="menu-title">
+            <h2 id="menu-title">Cardápio</h2>
+            <div class="menu__section">
+            <h2>Hamburgueres</h2>
+            <div id="burgers" class="grid"></div>
+            </div>
+
+            <div class="menu__section">
+            <h2>Bebidas</h2>
+            <div id="drinks" class="grid"></div>
+            </div>
+        </section>
+
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

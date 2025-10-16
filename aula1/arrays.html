@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+</head>
+<body>
+    
+    <h1>Exemplos de Array</h1>
+    <p>Abra o F12 para ver o console.</p>
+    <pre id="saida"></pre>
+
+    <script>
+        // Criar array simples
+        const frutas = ["maçã", "banana", "laranja"];
+        console.log("Frutas brasileiras:", frutas);
+
+        let texto = "Frutas Brasileiras " + frutas.join(", ") + "\n"
+
+        // Adicionar uma fruta
+        frutas.push("uva");
+
+        // Remover a primeira fruta
+        frutas.shift();
+
+        console.log("Frutas atualizadas:", frutas);
+
+        // Mostrar cada fruta com índice
+        frutas.forEach(function(f, i) {
+            console.log(`Fruta ${i + 1}: ${f}`);
+        }); // <- Parêntese e ponto e vírgula adicionados aqui
+
+        // Mostrar no HTML
+        document.getElementById("saida").textContent = "Frutas finais: " + frutas.join(", ");
+    </script>
+</body>
+</html>
