@@ -18,37 +18,106 @@
             </nav>
         </div>
     </header>
+
     <main class="container main">
+        <!-- Carrossel -->
         <section class="hero" aria-label="Promoções">
             <div class="carousel" id="carousel" aria-roledescription="carousel">
                 <div class="carousel__track" id="carousel__track">
                     <div class="carousel__slide is-active">
                         <img src="images/banner_1.jpg" alt="banner 1">
                     </div>
-                    <div>
+                    <div class="carousel__slide">
                         <img src="images/banner_2.jpg" alt="banner 2">
                     </div>
-                    <div>
+                    <div class="carousel__slide">
                         <img src="images/banner_3.jpg" alt="banner 3">
                     </div>
                 </div>
             </div>
         </section>
-        <section id="menu" class="class" aria-labelledby="menu-title">
+
+        <!-- Cardápio -->
+        <section id="menu" class="menu" aria-labelledby="menu-title">
             <h2 id="menu-title">Cardápio</h2>
+            
             <div class="menu__section">
-            <h2>Hamburgueres</h2>
-            <div id="burgers" class="grid"></div>
+                <h2>Hambúrgueres</h2>
+                <div id="burgers" class="grid"></div>
             </div>
 
             <div class="menu__section">
-            <h2>Bebidas</h2>
-            <div id="drinks" class="grid"></div>
+                <h2>Bebidas</h2>
+                <div id="drinks" class="grid"></div>
             </div>
         </section>
 
+        <!-- Carrinho -->
+        <section id="carrinho" class="cart" aria-labelledby="cart-title">
+            <h2 id="cart-title">Seu carrinho</h2>
+            <ul id="cart" class="cart__items" aria-live="polite"></ul> <!-- Corrigido ID e atributo -->
 
+            <div class="cart__totals">
+                <div class="row">
+                    <span>Subtotal</span>
+                    <strong id="subtotal">R$ 0,00</strong>
+                </div>
+
+                <div class="row">
+                    <span>Entrega</span>
+                    <strong id="delivery">R$ 0,00</strong>
+                </div>
+
+                <div class="row">
+                    <span>Total</span>
+                    <strong id="total">R$ 0,00</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout -->
+        <section id="checkout" class="checkout" aria-labelledby="checkout-title">
+            <h2 id="checkout-title">Finalizar Pedido</h2>
+            <form id="check-form" class="form" action="">
+                <div class="form__group">
+                    <label for="name">Nome Cliente</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form__group">
+                    <label for="address">Endereço</label>
+                    <input type="text" id="address" name="address">
+                </div>
+                <div class="form__group">
+                    <label for="payment">Pagamento</label>
+                    <select name="payment" id="payment">
+                        <option value="">Selecione</option>
+                        <option value="cartao">Cartão</option>
+                        <option value="pix">PIX</option>
+                        <option value="dinheiro">Dinheiro</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+            </form>
+        </section>
+
+        <!-- Status do Pedido -->
+        <section id="order-status">
+            <h3>Status do Pedido</h3>
+            <ol>
+                <li>Recebido</li>
+                <li>Em Preparo</li>
+                <li>A Caminho</li>
+                <li>Entregue</li>
+            </ol>
+        </section>
     </main>
+
+    <footer class="footer">
+        <div class="container">
+            <span>Titoburger Delivery - Rua Tito, 54</span>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
