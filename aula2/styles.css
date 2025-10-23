@@ -1,15 +1,22 @@
-/* Base */
-html, body {
+/* RESET */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: system-ui, sans-serif;
-  background: #d3dfec;
-  color: black;
+  background: #eef3f8;
+  color: #111827;
+  line-height: 1.5;
 }
 
+/* CONTAINER */
 .container {
   width: 100%;
   max-width: 1120px;
@@ -17,47 +24,53 @@ body {
   padding: 0 16px;
 }
 
-/* Header */
+/* HEADER */
 .header {
   background: #111827;
   color: white;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .header__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 14px 0;
 }
 
 .brand {
-  font-size: 20px;
-  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
 }
 
 .nav a {
-  color: #fffafa;
+  color: #fff;
   text-decoration: none;
-  margin-left: 16px;
-  font-size: 14px;
+  font-size: 15px;
+  transition: color 0.2s;
 }
 
 .nav a:hover {
-  color: #F0E68C;
+  color: #59a3f85d;
 }
 
-/* Main Layout */
+/* MAIN */
 .main {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 2fr 1fr;
   gap: 24px;
-  padding: 24px;
+  padding: 24px 0;
 }
 
-/* Carrossel */
+/* HERO / CARROSSEL */
 .hero {
   grid-column: 1 / -1;
 }
@@ -66,13 +79,14 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  border: 1px solid #fffafa;
+  border: 1px solid #ddd;
   background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .carousel__track {
   display: flex;
-  transition: transform 40ms ease;
+  transition: transform 0.5s ease-in-out;
 }
 
 .carousel__slide {
@@ -81,13 +95,13 @@ body {
 
 .carousel__slide img {
   width: 100%;
-  display: block;
+  height: 280px;
   object-fit: cover;
 }
 
 .carousel__dots {
   position: absolute;
-  bottom: 8px;
+  bottom: 10px;
   left: 0;
   right: 0;
   display: flex;
@@ -96,36 +110,37 @@ body {
 }
 
 .carousel__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: white;
-  border: 1px solid white;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .carousel__dot.is-active {
-  background: #16a34a;
-  border-color: #16a34a;
+  background: #111827;
 }
 
-/* Menu */
+/* MENU */
 .menu__section {
   margin-bottom: 24px;
 }
 
 .menu__section h2 {
-  font-size: 18px;
-  margin: 0 0 12px;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #111827;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
 
-/* Card */
+/* CARD */
 .card {
   background: white;
   border: 1px solid #ebe9e9;
@@ -133,78 +148,93 @@ body {
   padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .card__img {
   width: 100%;
-  height: 140px;
+  height: 150px;
   object-fit: cover;
   border-radius: 8px;
 }
 
 .card__title {
   font-size: 16px;
-  margin: 0;
+  font-weight: 600;
 }
 
 .card__desc {
   font-size: 13px;
-  color: #333;
-  margin: 0;
+  color: #555;
 }
 
 .card__footer {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .price {
   font-weight: 700;
-  color: black;
+  color: #111827;
 }
 
-/* Botões */
+/* BUTTONS */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border: 1px solid #111827;
-  background-color: #111827;
-  color: white;
-  padding: 8px 12px;
+  border: none;
+  padding: 8px 14px;
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s, opacity 0.3s;
 }
 
-.btn:hover {
-  opacity: 0.5;
-}
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn--ghost {
-  background: transparent;
-  color: #111827;
-  border-color: #d3dfec;
-}
-
-.btn--primary {
+.btn-primary {
   background: #16a34a;
-  background-color: #16a34a;
+  color: white;
 }
 
-/* Carrinho */
+.btn-primary:hover {
+  opacity: 0.8;
+}
+
+/* CARRINHO */
 .cart__items {
   list-style: none;
   padding: 0;
   margin-bottom: 16px;
+}
+
+.cart__item {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__item button {
+  border: none;
+  background: #16a34a;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .cart__totals .row {
@@ -213,18 +243,14 @@ body {
   margin-bottom: 8px;
 }
 
-/* Formulário */
-.checkout {
-  background: transparent;
-}
-
+/* FORM */
 .form {
-  background: #ebe9e9;
-  border: 1px solid #ebe9e9;
+  background: #f9fafb;
   border-radius: 10px;
   padding: 16px;
   display: grid;
   gap: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .form__group {
@@ -232,33 +258,62 @@ body {
   gap: 6px;
 }
 
-label {
-  font-size: 13px;
-  color: #374151;
-}
-
 input,
 select {
   padding: 10px;
-  border: 1px solid #d3dfec;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 14px;
-  background: white;
 }
 
 input:focus,
 select:focus {
-  outline: 2px solid #18652f;
   border-color: #16a34a;
+  outline: none;
 }
 
-/* Footer */
+/* FOOTER */
 .footer {
-  margin-top: 24px;
-  padding: 16px 0;
-  border-top: 2px solid #d3dfec;
-  color: #d6deec;
   background: #111827;
-  font-size: 12px;
+  color: #ccc;
   text-align: center;
+  padding: 20px 0;
+  font-size: 13px;
+  margin-top: 40px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 960px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .header__container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .carousel__slide img {
+    height: 200px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+
+  .card__img {
+    height: 130px;
+  }
+
+  .btn {
+    font-size: 13px;
+  }
 }
