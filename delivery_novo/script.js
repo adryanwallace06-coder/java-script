@@ -191,7 +191,7 @@ function initCarousel() {
   function next() { index = (index + 1) % total; update(); }
 
   // iniciar autoplay
-  let timer = setInterval(next, 4000);
+  let timer = setInterval(next, 8000);
   // pausando no foco/hover
   track.addEventListener('mouseenter', () => clearInterval(timer));
   track.addEventListener('mouseleave', () => { timer = setInterval(next, 4000); });
