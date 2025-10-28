@@ -1,0 +1,103 @@
+/* Base reset */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+/* Estilos globais */
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #1f2937; background: #f8fafc; }
+/*  criação de container */
+.container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+/* Header = CSS do Cabeçalho */
+.header { background: #111827; color: #fff; position: sticky; top: 0; z-index: 10; }
+/* display flexivel para se adequar a qualquer dispositivo */
+.header__content { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+.brand { font-size: 20px; margin: 0; }
+
+.nav a { color: #e5e7eb; text-decoration: none; margin-left: 16px; font-size: 14px; }
+/* efeito hover - Quando o mouse passa por cima do link */
+.nav a:hover { color: #e3dd39; }
+
+/* Main layout */
+.main { display: grid; grid-template-columns: 1fr 320px; gap: 24px; padding: 24px 0; }
+
+/* Hero Carousel */
+.hero { grid-column: 1 / -1; }
+.carousel { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid #e5e7eb; background: #fff; }
+.carousel__track { display: flex; transition: transform 400ms ease; }
+.carousel__slide { min-width: 100%; }
+.carousel__slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.carousel__dots { position: absolute; left: 0; right: 0; bottom: 8px; display: flex; justify-content: center; gap: 6px; }
+.carousel__dot { width: 8px; height: 8px; border-radius: 999px; background: #ffffffaa; border: 1px solid #ffffff; cursor: pointer; }
+.carousel__dot.is-active { background: #16a34a; border-color: #16a34a; }
+
+/* Menu */
+.menu h2, .checkout h2, .cart h2 { margin: 0 0 12px; font-size: 22px; }
+.menu__section { margin-bottom: 24px; }
+.menu__section h3 { margin: 0 0 12px; font-size: 18px; color: #374151; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+
+/* Cartão de produto */
+.card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.card__img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; }
+.card__title { font-size: 16px; margin: 0; }
+.card__desc { font-size: 13px; color: #6b7280; margin: 0; }
+.card__footer { display: flex; align-items: center; justify-content: space-between; }
+
+/* Preço */
+.price { font-weight: 700; color: #122711; }
+
+/* Botões */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #29478a; background: #29478a; color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+.btn:hover { opacity: 0.7; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn--ghost { background: transparent; color: #111827; border-color: #d1d5db; }
+.btn--primary { background: #16a34a; border-color: #16a34a; }
+
+/* Carrinho */
+.cart { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; height: fit-content; position: sticky; top: 72px; }
+.cart__items { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 10px; }
+.cart__item { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
+.cart__item-title { margin: 0; font-size: 14px; }
+.cart__qty { display: inline-flex; align-items: center; gap: 6px; }
+.cart__qty button { width: 26px; height: 26px; border-radius: 6px; }
+.cart__line { color: #6b7280; font-size: 13px; }
+/*  Totais do carrinho */
+.cart__totals { border-top: 1px dashed #e5e7eb; padding-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.row { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
+.row.total { font-size: 16px; font-weight: 700; }
+
+/* Checkout / Fechamento da compra */
+.checkout { background: transparent; }
+/* Formulário de checkout  */
+.form { background: #ffffff; border: 1px solid #98a8c6; border-radius: 10px; padding: 16px; display: grid; gap: 12px; }
+/*  Status do pedido */
+.order { margin-top: 16px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; }
+.order--hidden { display: none; }
+.order__steps { list-style: none; padding: 0; margin: 0 0 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; font-size: 13px; color: #6b7280; }
+.order__step { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; text-align: center; }
+.order__step.is-done { background: #dcfce7; border-color: #86efac; color: #166534; font-weight: 600; }
+.order__progress { height: 8px; background: #f3f4f6; border-radius: 999px; overflow: hidden; border: 1px solid #e5e7eb; }
+.order__bar { height: 100%; background: #16a34a; width: 0%; transition: width 400ms ease; }
+.form__group { display: grid; gap: 6px; }
+/*  Formulário de checkout / Labels */
+label { font-size: 13px; color: #374151; }
+/*  Campos do formulário / Inputs e selects */
+input, select { padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; background: #fff; }
+input:focus, select:focus { outline: 2px solid #16a34a55; border-color: #16a34a; }
+
+/* Footer CSS do rodapé */
+.footer { margin-top: 24px; padding: 16px 0; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px; }
+
+/* Responsive / Design Responsivo */
+@media (max-width: 960px) {
+  .main { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cart { position: static; }
+}
+/*  Design Responsivo */
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+  .header__content { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .nav a { margin-left: 0; margin-right: 12px; }
+}
+
+
