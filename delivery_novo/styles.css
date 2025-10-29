@@ -7,7 +7,7 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-seri
 .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 
 /* Header = CSS do Cabeçalho */
-.header { background: #111827; color: #fff; position: sticky; top: 0; z-index: 10; }
+.header { background: #b11925; color: #fff; position: sticky; top: 0; z-index: 10; }
 /* display flexivel para se adequar a qualquer dispositivo */
 .header__content { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
 .brand { font-size: 20px; margin: 0; }
@@ -27,7 +27,7 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-seri
 .carousel__slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .carousel__dots { position: absolute; left: 0; right: 0; bottom: 8px; display: flex; justify-content: center; gap: 6px; }
 .carousel__dot { width: 8px; height: 8px; border-radius: 999px; background: #ffffffaa; border: 1px solid #ffffff; cursor: pointer; }
-.carousel__dot.is-active { background: #16a34a; border-color: #16a34a; }
+.carousel__dot.is-active { background: transparent; }
 
 /* Menu */
 .menu h2, .checkout h2, .cart h2 { margin: 0 0 12px; font-size: 22px; }

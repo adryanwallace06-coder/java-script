@@ -1,19 +1,19 @@
 // Dados simples do cardápio
 const products = {
   burgers: [
-    { id: 'b1', name: 'Clássico', desc: 'Pão, carne, queijo, alface e tomate', price: 18.9, img: './images/hamb_1.jpg' },
-    { id: 'b2', name: 'Cheddar Bacon', desc: 'Cheddar cremoso e bacon crocante', price: 24.5, img: './images/hamb_2.jpg' },
-    { id: 'b3', name: 'Veggie', desc: 'Grão-de-bico, alface, tomate e maionese', price: 21.0, img: './images/hamb_3.jpg' },
+    { id: 'b1', name: 'Clássico', desc: 'Pão com gergelim, carne, queijo, alface, tomate, cebola, picles e molho especial', price: 18.9, img: './images/hamb_1.png' },
+    { id: 'b2', name: 'Cheddar Bacon', desc: 'Pão Brioche, dupla carne, cheddar cremoso e bacon', price: 24.5, img: './images/hamb_2.jpeg' },
+    { id: 'b3', name: 'Vegetariano', desc: 'Pão, Grão-de-bico, alface, tomate, cebola e pepino', price: 21.0, img: './images/hamb_3.jpeg' },
   ],
   drinks: [
-    { id: 'd1', name: 'Refrigerante Lata', desc: '350 ml', price: 6.0, img: './images/refri_2.jpg' },
-    { id: 'd2', name: 'Refrigerante 600 ml', desc: 'Garrafa 600 ml', price: 9.5, img: './images/refri_1.jpg' },
-    { id: 'd3', name: 'Água', desc: 'Sem gás 500 ml', price: 4.5, img: './images/refri_3.jpg' },
+    { id: 'd1', name: 'Refrigerante Lata', desc: '350 ml', price: 6.0, img: './images/refri_2.jpeg' },
+    { id: 'd2', name: 'Refrigerante 600 ml', desc: 'Garrafa 600 ml', price: 8.5, img: './images/refri_1.jpeg' },
+    { id: 'd3', name: 'Água', desc: 'Sem gás 500 ml', price: 2.5, img: './images/refri_3.jpeg' },
   ],
   pizzas: [
     { id: 'p1', name: 'Muzzarela', desc: 'Muzzarela com tomates', price: 30.0, img: './images/pizza1.png' },
     { id: 'p2', name: 'Calabreza', desc: 'Calabreza fresca fatiada', price: 35.0, img: './images/pizza2.png' },
-    { id: 'p3', name: 'Atum', desc: 'Atum Solido com cebola', price: 40.5, img: './images/pizza3.png' },
+    { id: 'p3', name: 'Atum', desc: 'Atum Solido com cebola', price: 40.0, img: './images/pizza3.png' },
   ],  
 };
 
@@ -191,7 +191,7 @@ function initCarousel() {
   function next() { index = (index + 1) % total; update(); }
 
   // iniciar autoplay
-  let timer = setInterval(next, 8000);
+  let timer = setInterval(next, 6000);
   // pausando no foco/hover
   track.addEventListener('mouseenter', () => clearInterval(timer));
   track.addEventListener('mouseleave', () => { timer = setInterval(next, 4000); });
