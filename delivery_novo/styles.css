@@ -7,12 +7,12 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-seri
 .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 
 /* Header = CSS do Cabeçalho */
-.header { background: #111827; color: #fff; position: sticky; top: 0; z-index: 10; }
+.header { background: #b11925; color: #fff; position: sticky; top: 0; z-index: 10; }
 /* display flexivel para se adequar a qualquer dispositivo */
 .header__content { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
 .brand { font-size: 20px; margin: 0; }
 
-.nav a { color: #e5e7eb; text-decoration: none; margin-left: 16px; font-size: 14px; }
+.nav a {  color: #e5e7eb; text-decoration: none; margin-left: 16px; font-size: 14px; }
 /* efeito hover - Quando o mouse passa por cima do link */
 .nav a:hover { color: #e3dd39; }
 
@@ -27,7 +27,7 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-seri
 .carousel__slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .carousel__dots { position: absolute; left: 0; right: 0; bottom: 8px; display: flex; justify-content: center; gap: 6px; }
 .carousel__dot { width: 8px; height: 8px; border-radius: 999px; background: #ffffffaa; border: 1px solid #ffffff; cursor: pointer; }
-.carousel__dot.is-active { background: #16a34a; border-color: #16a34a; }
+.carousel__dot.is-active { background: transparent; }
 
 /* Menu */
 .menu h2, .checkout h2, .cart h2 { margin: 0 0 12px; font-size: 22px; }
@@ -46,7 +46,7 @@ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-seri
 .price { font-weight: 700; color: #122711; }
 
 /* Botões */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #29478a; background: #29478a; color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #b11925; background: #b11925; color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; }
 .btn:hover { opacity: 0.7; }
 .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn--ghost { background: transparent; color: #111827; border-color: #d1d5db; }
