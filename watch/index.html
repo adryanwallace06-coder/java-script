@@ -1,70 +1,198 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tito Watch</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <nav>
-        <ul>
-            <li><a href="#"><img src="https://logospng.org/download/apple/logo-apple-1024.png" height="30px" alt="Logo"></a></li>
-            <li><a href="#">Loja</a></li>
-            <li><a href="#">Mac</a></li>
-            <li><a href="#">Ipad</a></li>
-            <li><a href="#">Iphone</a></li>
-            <li><a href="#">Watch</a></li>
-            <li><a href="#">AirPods</a></li>
-            <li><a href="#">Tv e Casa</a></li>
-            <li><a href="#">Entretenimentos</a></li>
-            <li><a href="#">Acessórios</a></li>
-            <li><a href="#">Suporte</a></li>
-        </ul>
+      <ul>
+        <li>
+          <img
+            src="https://www.svgrepo.com/show/69341/apple-logo.svg"
+            alt=""
+            width="30px"
+          />
+        </li>
+        <li><a href="#">Loja</a></li>
+        <li><a href="#">Mac</a></li>
+        <li><a href="#">Ipad</a></li>
+        <li><a href="#">Iphone</a></li>
+        <li><a href="#">watch</a></li>
+        <li><a href="#">AirPods</a></li>
+        <li><a href="#">TV e Casa</a></li>
+        <li><a href="#">Entretenimento</a></li>
+        <li><a href="#">Acessórios</a></li>
+        <li><a href="#">Suporte</a></li>
+      </ul>
     </nav>
 
     <main>
-        <section id="produto">
-            <div id="opcoes-produto">
-                <h1 id="titulo-produto">Pulseira loop esportiva azul-inverno para caixa de 45mm</h1>
-                <div class="precos">
-                    <p id="precos">R$ 499,90</p>
+      <section id="produto">
+        <div id="opcoes-produto">
+          <h1 id="titulo-produto">
+            Pulseira loop esportiva azul-inverno para caixa de 45mm
+          </h1>
+          <div class="precos">
+            <p id="preco">R$ 499,90</p>
+          </div>
 
-                </div>
+          <span id="parcelas" class="link">
+            <p>Em até 12x de R$ 41,58 sem juros</p>
+          </span>
+          <p id="a-vista">R$ 499,10 à vista (10% de desconto)</p>
+        </div>
+        <div id="opcoes">
+          <h2 id="nome-cor-selecionada">Cor - Azul-inverno</h2>
+          <ul id="selecao-cores">
+            <li>
+              <input
+                type="radio"
+                name="opcao-cor"
+                id="0-cor"
+                onclick="atualizarCorSelecionada()"
+              />
+              <label for="0-cor">
+                <img
+                  src="/imagens/opcoes-cores/verde-cipreste.jpeg"
+                  alt=""
+                  srcset=""
+                />
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="opcao-cor"
+                id="1-cor"
+                onclick="atualizarCorSelecionada()"
+              />
+              <label for="1-cor">
+                <img
+                  src="/imagens/opcoes-cores/azul-inverno.jpeg"
+                  alt=""
+                  srcset=""
+                />
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="opcao-cor"
+                id="2-cor"
+                onclick="atualizarCorSelecionada()"
+              />
+              <label for="2-cor">
+                <img
+                  src="/imagens/opcoes-cores/meia-noite.jpeg"
+                  alt=""
+                  srcset=""
+                />
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="opcao-cor"
+                id="3-cor"
+                onclick="atualizarCorSelecionada()"
+              />
+              <label for="3-cor">
+                <img
+                  src="/imagens/opcoes-cores/estelar.jpeg"
+                  alt=""
+                  srcset=""
+                />
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="opcao-cor"
+                id="4-cor"
+                onclick="atualizarCorSelecionada()"
+              />
+              <label for="4-cor">
+                <img
+                  src="/imagens/opcoes-cores/rosa-claro.jpeg"
+                  alt=""
+                  srcset=""
+                />
+              </label>
+            </li>                        
+          </ul>
+          <div id="tamanho-caixa">
+            <h2>Tamanho da caixa</h2>
+            <div id="opcoes-tamanho">
+              <input
+                type="radio"
+                name="opcao-tamanho"
+                id="0-tamanho"
+                onclick="atualizarTamanho()"
+              />
+              <label for="0-tamanho">41mm</label>
+              <input
+                type="radio"
+                name="opcao-tamanho"
+                id="1-tamanho"
+                onclick="atualizarTamanho()"
+                checked
+              />
+              <label for="1-tamanho">45mm</label>
+            </div>
 
-                <span id="parcelas" class="link">
-                    <p>Em até 12x de R$ 41,65 sem juros</p>
-                    <p>ou R$ 499,90 à vista (10% de desconto)</p>
-                </span>
-                </div>
-                <div id="opcoes">
-                    <h2 id="nome-cor-selecionada">Cor - azul-inverno</h2>
-                    <ul id="selecao-cores">
-                        <li>
-                            <input type="radio" name="opcao-cor" id="0-cor" onclick="atualizarCorSelecionada()">
-                            <label for="0-cor"><img src="imagens/opcoes-cores/verde-cipreste.jpeg" alt="" srcset=""></label>
-                        </li>
-                        <li>
-                            <input type="radio" name="opcao-cor" id="1-cor" onclick="atualizarCorSelecionada()">
-                            <label for="1-cor"><img src="imagens/opcoes-cores/azul-inverno.jpeg" alt="" srcset=""></label>
-                        </li>
-                        <li>
-                            <input type="radio" name="opcao-cor" id="2-cor" onclick="atualizarCorSelecionada()">
-                            <label for="2-cor"><img src="imagens/opcoes-cores/rosa-claro.jpeg" alt="" srcset=""></label>
-                        </li>
-                        <li>
-                            <input type="radio" name="opcao-cor" id="3-cor" onclick="atualizarCorSelecionada()">
-                            <label for="3-cor"><img src="imagens/opcoes-cores/estelar.jpeg" alt="" srcset=""></label>
-                        </li>
-                                                <li>
-                            <input type="radio" name="opcao-cor" id="4-cor" onclick="atualizarCorSelecionada()">
-                            <label for="4-cor"><img src="imagens/opcoes-cores/meia-noite.jpeg" alt="" srcset=""></label> 
-                        </li>
-                    </ul>
-                </div>
+            <div id="disclaimer">
+                <p>Compatível com a maioria das versões de Apple Watch</p>
+                <p id="saiba-mais" class="link">
+                    Saiba mais sobre a compatibilidade de pulseiras <b>&#8250;</b>
+                </p>
+            </div>
+            <div id="info-extra">
+                <h2>Tamanho da pulseira</h2>
+                <p id="info-principal">
+                    Tamanho único (cabe na maioria dos pulsos)
+                </p>
+                <p id="info-secundaria">
+                    Para Pulsos de 145 a 220 mm.
+                </p>
+            </div>
+          </div>
+        </div>
+        <div id="visualizacao">
+            <img src="/imagens/opcoes-cores/imagens-azul-inverno/imagem-1.jpeg" alt="" id="imagem-visualizacao" />
 
+            <ul id="selecionar-imagem">
+                <li>
+                    <input type="radio" name="opcao-imagem" id="0-imagem" onclick="atualizarImagemSelecionada()"/>
+                    <label for="0-imagem">
+                       <img src="./imagens/opcoes-cores/imagens-azul-inverno/imagem-0.jpeg" alt="" srcset=""
+                       id="0-imagem-miniatura"/>
+                    </label>                     
+                </li>
 
-        </section>
+                <li>
+                    <input type="radio" name="opcao-imagem" id="1-imagem" onclick="atualizarImagemSelecionada()"/>
+                    <label for="1-imagem">
+                       <img src="./imagens/opcoes-cores/imagens-azul-inverno/imagem-1.jpeg" alt="" srcset=""
+                       id="1-imagem-miniatura"/>
+                    </label>                     
+                </li>
+                <li>
+                    <input type="radio" name="opcao-imagem" id="2-imagem" onclick="atualizarImagemSelecionada()"/>
+                    <label for="2-imagem">
+                       <img src="./imagens/opcoes-cores/imagens-azul-inverno/imagem-2.jpeg" alt="" srcset=""
+                       id="2-imagem-miniatura"/>
+                    </label>                     
+                </li>
+
+            </ul>
+
+        </div>
+
+      </section>
     </main>
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>
