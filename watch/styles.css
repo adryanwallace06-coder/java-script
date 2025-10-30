@@ -341,3 +341,87 @@ main {
     /* Estiliza a caixa pequena alterando a escala */
   transform: scale(0.9);
 }
+
+/* ...existing code... */
+
+/* Responsividade */
+@media (max-width: 1100px) {
+  nav, main {
+    width: 95vw;
+    min-width: 0;
+  }
+  #produto {
+    flex-direction: column;
+    align-items: center;
+  }
+  #visualizacao {
+    margin: 2rem 0 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #opcoes-produto {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  nav ul {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+  main {
+    margin: 1rem 0;
+    width: 100vw;
+    padding: 0 0.5rem;
+  }
+  #produto {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #visualizacao {
+    margin: 1rem 0 0 0;
+    width: 100%;
+  }
+  #opcoes-produto {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  #opcoes-produto > h1 {
+    width: 100%;
+    font-size: 1.3rem;
+  }
+  #opcoes ul {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0 0 0;
+  }
+  #selecionar-imagem {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  #visualizacao img#imagem-visualizacao {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  nav ul {
+    font-size: 0.8rem;
+    gap: 0.2rem;
+  }
+  #opcoes-produto > h1 {
+    font-size: 1rem;
+  }
+  #visualizacao img#imagem-visualizacao {
+    max-width: 95vw;
+  }
+  #selecionar-imagem li label > img {
+    width: 2rem;
+  }
+}
