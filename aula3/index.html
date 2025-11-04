@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Acentuação -->
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nome do Site</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo"><a href="index.html"><img src="./images/logo.gif" width="100" height="100" alt="Logo"></a></div>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#index">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="banner">
+            <img src="images/banner-teste.avif" width="100%" height="250px" alt="Banner Principal">
+
+        </section>
+        <section id="home" class="home-section">
+            <h1>Bem-vindo ao Nosso Site</h1>
+            <p>Esta é a seção inicial do site.</p>
+        </section>
+
+        <section id="sobre" class="about-section">
+            <h2>Sobre Nós</h2>
+            <p>Informações sobre a empresa.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/hTuQlQqZzng?si=rpys0qMXQDJRRM-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </section>
+
+        <section id="servicos" class="services-section">
+            <h2>Nossos Serviços</h2>
+            <p>Detalhes dos serviços oferecidos.</p>
+            <div class="container-servicos">
+                <div class="service-1">
+                    <h3>Serviço 1</h3>
+                    <img src="images/services.webp" alt="">
+                    <p>Descrição do Serviço 1.</p>
+                    <button>Saiba Mais</button>
+                </div>
+                <div class="service-1">
+                    <h3>Serviço 1</h3>
+                    <img src="images/services.webp" alt="">
+                    <p>Descrição do Serviço 1.</p>
+                    <button>Saiba Mais</button>
+                </div>
+                <div class="service-1">
+                    <h3>Serviço 1</h3>
+                    <img src="images/services.webp" alt="">
+                    <p>Descrição do Serviço 1.</p>
+                    <button>Saiba Mais</button>
+            </div>
+        </section>
+
+        <section id="contato" class="contact-section">
+            <h2>Contato</h2>
+            <p>Mande uma mensagem para nós.</p>
+            <div class="contact-form">
+                <p class="label">Nome:</p>   <input type="text" placeholder="Digite seu nome">
+                <p class="label">Email:</p>   <input type="email" placeholder="Digite seu email">
+                <p class="label">Mensagem:</p>   <textarea placeholder="Digite sua mensagem"></textarea>
+                <button type="submit">Enviar</button>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">    
+        <p>Redes Sociais</p>
+        <a href="https://www.instagram.com/adryzzin_" target="_blank" rel="noopener noreferrer"><img src="images/instagram.logo.jpg" width="80" height="80" alt=""></a>
+        <p>&copy; 2024 Nome da Empresa. Todos os direitos reservados.</p>
+    </footer>
+    <script src="./js/script.js"></script>
+</body>
+</html>
