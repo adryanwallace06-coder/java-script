@@ -51,6 +51,104 @@ body {
     text-decoration: underline;
 }
 
+/* banner carrousel */
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    background: black;
+}
+
+.carrousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+}
+
+.carrousel-track {
+    display: flex; 
+    width: 100%;
+    height: 100%;
+    transition: tranfsform 0.5s ease-in-out;
+}
+
+.carrousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carrousel-slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Botões de navegação */
+
+.carrousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    border: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+}
+
+.carrousel-btn:hover {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.carrousel-btn.prev {
+    left: 10px;
+}
+
+.carrousel-btn.next {
+    right: 10px;
+}
+
+/* dots (indicadores) */
+
+.carrousel-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    z-index: 2;
+}
+
+.carrousel-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 0;
+}
+
+.carrousel-dots button.active {
+    background: #0074d9; /* azul */
+    border: 2px solid #005fa3;
+    width: 12px;
+    height: 12px;
+}
+
 .home-section {
     background-color: #e0f7fa;
     text-align: center;
@@ -129,9 +227,14 @@ button {
     padding: 10px 20px;
     border: none;
     background-color: #abcff8;
+    
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #005fa3;
 }
 
 .menu-toggle {
