@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Configuração do carrousel a partir do atributo HTML
     const autoplay = root.getAttribute('data-autoplay') === 'true'; // Verifica se o auto play está ativado no html como true
-    const interValMs = parseInt(root.getAttribute('data-interval') || '4000', 10); // Define o intervalo de troca dos slides 
+    const intervalMs = parseInt(root.getAttribute('data-interval') || '4000', 10); // Define o intervalo de troca dos slides 
 
     // Estado inicial do carrousel
     let index = 0; // Índice do slide atual
