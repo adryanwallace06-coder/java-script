@@ -10,14 +10,14 @@
 <body>
     <header class="header">
         <nav class="navbar">
-            <div class="logo"><a href="index.html"><img src="./images/logo.gif" width="100" height="100" alt="Logo"></a></div>
+            <div class="logo"><a href="index.html"><img src="./images/logo.webp" width="100" height="100" alt="Logo"></a></div>
             <div class="menu-toggle" id="menu-toggle">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#index">Início</a></li>
+                <li><a href="#home">Início</a></li>
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#contato">Contato</a></li>
@@ -26,72 +26,72 @@
     </header>
     <main>
 
-        <!-- Carrousel -->
-        <section class="banner" id="banner">
-            <div class="carrousel" data-autoplay="true" data-interval="4000">
-                <div class="carrousel-track">
-                    <div class="carrousel-slide">
-                        <img src="images/Banner.jpg" width="100%" height="250px" alt="Banner 1">
+        <div class="container">
+            <!-- Carrousel -->
+            <section class="banner" id="banner">
+                <div class="carrousel" data-autoplay="true" data-interval="4000">
+                    <div class="carrousel-track">
+                        <div class="carrousel-slide">
+                                <img src="images/clash-royale-banner.webp" width="100%" height="250px" alt="Banner 1">
+                        </div>
+                        <div class="carrousel-slide">
+                            <img src="images/banner-pqn.webp" width="100%" height="250px" alt="Banner 2">
+                        </div>
+                        <div class="carrousel-slide">
+                            <img src="images/banner-2.webp" width="100%" height="250px" alt="Banner 3">
+                        </div>
                     </div>
-                    <div class="carrousel-slide">
-                        <img src="images/banner-teste.avif" width="100%" height="250px" alt="Banner 2">
-                    </div>
-                    <div class="carrousel-slide">
-                        <img src="images/Banner.jpg" width="100%" height="250px" alt="Banner 3">
-                    </div>
+                    <!-- Incluir botões -->
+                    <button class="carrousel-btn prev" aria-label="Anterior">&#10094;</button>
+                    <button class="carrousel-btn next" aria-label="Proximo">&#10095;</button>
+                    <div class="carrousel-dots"></div>
                 </div>
-                <!-- Incluir botões -->
-                <button class="carrousel-btn prev" aria-label="Anterior">&#10094;</button>
-                <button class="carrousel-btn next" aria-label="Proximo">&#10095;</button>
-                <div class="carrousel-dots"></div>
-            </div>
-        </section>
-        <section id="home" class="home-section">
-            <h1>Bem-vindo ao Nosso Site</h1>
-            <p>Esta é a seção inicial do site.</p>
-        </section>
-
-        <section id="sobre" class="about-section">
-            <h2>Sobre Nós</h2>
-            <p>Informações sobre a empresa.</p>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/hTuQlQqZzng?si=rpys0qMXQDJRRM-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </section>
-
-        <section id="servicos" class="services-section">
-            <h2>Nossos Serviços</h2>
-            <p>Detalhes dos serviços oferecidos.</p>
-            <div class="container-servicos">
-                <div class="service-1">
-                    <h3>Serviço 1</h3>
-                    <img src="images/services.webp" alt="">
-                    <p>Descrição do Serviço 1.</p>
-                    <button>Saiba Mais</button>
-                </div>
-                <div class="service-1">
-                    <h3>Serviço 1</h3>
-                    <img src="images/services.webp" alt="">
-                    <p>Descrição do Serviço 1.</p>
-                    <button>Saiba Mais</button>
-                </div>
-                <div class="service-1">
-                    <h3>Serviço 1</h3>
-                    <img src="images/services.webp" alt="">
-                    <p>Descrição do Serviço 1.</p>
-                    <button>Saiba Mais</button>
+            </section>
+            <section id="home" class="home-section">
+                <h1>Bem-vindo ao Nosso Site</h1>
+                <p>Somos uma equipe dedicada a oferecer soluções eficientes para melhorar sua jogabilidade. Transformamos o sonho de jogar bem em resultados com inovação, qualidade e compromisso.</p>
+                <a href="#servicos">Veja nossos produtos</a>
+            </section>
+            <section id="sobre" class="about-section">
+                <h2>Sobre Nós</h2>
+                <p>Assista um video do nosso influencer jogando.</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/hTuQlQqZzng?si=rpys0qMXQDJRRM-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </section>
+            <section id="servicos" class="services-section">
+                <h2>Nossos Serviços</h2>
+                <p>Detalhes dos serviços oferecidos.</p>
+                <div class="container-servicos">
+                    <div class="service-1">
+                        <h3>Como jogar</h3>
+                        <img src="images/servicos1.webp" alt="">
+                        <p>Aprenda a jogar igual um profissional</p>
+                        <button>Comprar</button>
                     </div>
-            </div>
-        </section>
-
-        <section id="contato" class="contact-section">
-            <h2>Contato</h2>
-            <p>Mande uma mensagem para nós.</p>
-            <div class="contact-form">
-                <p class="label">Nome:</p>   <input type="text" placeholder="Digite seu nome">
-                <p class="label">Email:</p>   <input type="email" placeholder="Digite seu email">
-                <p class="label">Mensagem:</p>   <textarea placeholder="Digite sua mensagem"></textarea>
-                <button type="submit">Enviar</button>
-            </div>
-        </section>
+                    <div class="service-1">
+                        <h3>Como subir arena</h3>
+                        <img src="images/servicos.webp" alt="">
+                        <p>Aprenda a subir de arena mais rapido</p>
+                        <button>Comprar</button>
+                    </div>
+                    <div class="service-1">
+                        <h3>Como evoluir cartas</h3>
+                        <img src="images/servicos3.jpg" alt="">
+                        <p>Aprenda a evoluir suas cartas mais rapido</p>
+                        <button>Comprar</button>
+                        </div>
+                </div>
+            </section>
+            <section id="contato" class="contact-section">
+                <h2>Contato</h2>
+                <p>Mande uma mensagem para nós.</p>
+                <div class="contact-form">
+                    <p class="label">Nome:</p>   <input type="text" placeholder="Digite seu nome">
+                    <p class="label">Email:</p>   <input type="email" placeholder="Digite seu email">
+                    <p class="label">Mensagem:</p>   <textarea placeholder="Digite sua mensagem"></textarea>
+                    <button type="submit">Enviar</button>
+                </div>
+            </section>
+        </div>
     </main>
     <footer class="footer">    
         <p>Redes Sociais</p>
