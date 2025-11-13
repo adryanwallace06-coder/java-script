@@ -1,0 +1,56 @@
+<!--  cep.html
+  Consumindo uma API Json  -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cep</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Consulta de CEP</h1>
+    <script>
+        function consultarCEP() {
+            // Pega o valor do campo CEP        
+            var cep = document.getElementById('cep').value
+            // limpa o cep eliminando traço, se houver
+            if (!cep.match(/^\d{5}-?\d{3}$/)) {
+                alert('Digite um CEP válido.');
+                return;
+            }
+            // URL da API ViaCEP
+            $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
+                if (!data.erro) {
+                    document.getElementById('logradouro').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade;
+                    document.getElementById('estado').value = data.uf;
+                } else {
+                    alert('CEP não encontrado.');
+                }
+            }).fail(function() {
+                alert('Erro ao consultar o CEP.');
+            });
+        }
+    </script>
+    <form>
+        <label for="cep">Digite o CEP</label><br>
+        <!-- onblur é usado para acionar a consulta ao sair do campo -->
+        <input type="text" id="cep" name="cep" required onblur="consultarCEP()">
+        <br>
+        <label for="logradouro">Endereço</label><br>
+        <input type="text" for="logradouro" name="logradouro" id="logradouro">
+        <br>
+        <label for="bairro">Bairro</label><br>  
+        <input type="text" for="bairro" name="bairro" id="bairro">
+        <br>    
+        <label for="cidade">Cidade</label><br>
+        <input type="text" for="cidade" name="cidade" id="cidade">
+        <br>
+        <label for="estado">Estado</label><br>
+        <input type="text" for="estado" name="estado" id="estado">
+    </form>
+   
+</body>
+</html>

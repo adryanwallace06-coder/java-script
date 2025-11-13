@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de imagens</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-image: url('https://img.freepik.com/fotos-gratis/fundo-desfocado-escuro-abstrato-cor-de-textura-de-gradiente-suave-padrao-de-site-brilhante-brilhante-cabecalho-de-banner-ou-imagem-de-arte-grafica-de-barra-lateral_1258-85449.jpg');
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            border-color: #709dbc;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.514);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+        }
+
+        .fechar {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bem-vindo à nossa galeria de imagens</h1>
+    <p>Aqui estão algumas das nossas imagens favoritas</p>
+    <!-- Container das imagens com a class gallery -->
+    <div class="gallery">
+        <img src="https://picsum.photos/id/1015/300/200" alt="img1">
+        <img src="https://picsum.photos/id/1025/300/200" alt="img2">
+        <img src="https://picsum.photos/id/1035/300/200" alt="img3">
+        <img src="https://picsum.photos/id/1045/300/200" alt="img4">
+        <img src="https://picsum.photos/id/1055/300/200" alt="img5">
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="fechar" id="fechar">&times;</span>
+        <img class="imagem-ampliada" src="" alt="">
+    </div>
+
+    <!-- Adicionar evento de click para cada imagem da galeria -->
+     <script>
+        // Seleciona todas as imagens da galeria com a classe "gallery"
+        const imagens = document.querySelectorAll('.gallery img');
+        // Seleciona o elemento lightbox e a imagem ampliada pelo ID
+        const lightbox = document.getElementById('lightbox');
+        // Seleciona a imagem ampliada dentro do lightbox
+        const imagemAmpliada = lightbox.querySelector('.imagem-ampliada');  
+        // Seleciona o botão de fechar pelo ID
+        const fechar = document.getElementById('fechar');
+ 
+        // Quando clica em uma imagem da galeria, abre o lightbox
+        // forEach percorre todas as imagens selecionadas
+        imagens.forEach(img => {
+            img.addEventListener('click', () => {
+                // Define a fonte da imagem ampliada como a da imagem clicada
+                imagemAmpliada.src = img.src;
+                // Vai permitir que o lightbox seja exibido, centralizado e responsivo
+                lightbox.style.display = 'flex';
+            });
+        });
+ 
+        // Fecha o lightbox quando clica no "x"
+        fechar.addEventListener('click', () => {
+            // Esconder o elemento lightbox
+            lightbox.style.display = 'none';
+            imagemAmpliada.src = '';
+        });
+ 
+        // Fecha o lightbox quando clica fora da imagem ampliada
+        lightbox.addEventListener('click', (e) => {
+            // Verifica se o clique não foi na imagem ampliada nem no botão fechar
+            if (e.target !== imagemAmpliada && e.target !== fechar) {
+                lightbox.style.display = 'none';
+                imagemAmpliada.src = '';
+            }
+        });
+     </script>
+</body>
+</html>
