@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- lista_tarefas.html -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Tarefas - Javascript</title>
+ 
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #0f1221;
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+  }
+ 
+  h1 { color: #6ea8fe; }
+ 
+  input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 6px;
+    border: none;
+    margin-right: 5px;
+  }
+ 
+  button {
+    padding: 10px 15px;
+    border: none;
+    background: #6ea8fe;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+ 
+  button:hover {
+    background: #568ee6;
+  }
+ 
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  li {
+    background: #161a2e;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+ 
+  li span {
+    cursor: pointer;
+    color: #ff5050;
+    font-size: 18px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+ 
+<h1>📋 Lista de Tarefas</h1>
+<!-- Campo para digitar nova tarefa -->
+<input type="text" id="taskInput" placeholder="Digite a tarefa..." />
+<!-- Botão para adicionar tarefa -->
+<button id="addBtn">Adicionar</button>
+<!-- Lista de tarefas (Onde aparecerão as tarefas) -->
+<ul id="taskList"></ul>
+ 
+<script>
+  const taskInput = document.getElementById('taskInput');
+  const addBtn = document.getElementById('addBtn');
+  const taskList = document.getElementById('taskList');
+ 
+  // Carrega as tarefas do localStorage ou inicia um array vazio
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+ 
+  // Função principal: renderiza na tela
+  function renderTasks() {
+    taskList.innerHTML = "";  // limpa a lista
+    tasks.forEach((task, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `${task} <span onclick="deleteTask(${index})">✖</span>`;
+      taskList.appendChild(li);
+    });
+  }
+ 
+  // Função para adicionar tarefa
+  function addTask() {
+    const taskText = taskInput.value.trim();
+    if (taskText === "") return;
+ 
+    tasks.push(taskText);              // adiciona ao array
+    localStorage.setItem('tasks', JSON.stringify(tasks)); // salva
+    taskInput.value = "";             // limpa campo
+    renderTasks();                    // atualiza a lista
+  }
+ 
+  // Função para excluir tarefa
+  function deleteTask(index) {
+    tasks.splice(index, 1);            // remove do array
+    localStorage.setItem('tasks', JSON.stringify(tasks)); // salva
+    renderTasks();                    // atualiza tela
+  }
+ 
+  // Eventos
+  addBtn.addEventListener('click', addTask);
+ 
+  taskInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addTask();
+  });
+ 
+  // Renderiza tarefas ao carregar
+  renderTasks();
+</script>
+ 
+</body>
+</html>

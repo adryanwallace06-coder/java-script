@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooltip e pop-up Personalizado</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .icon-info {
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 125%; /* Posiciona acima do ícone */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            z-index: 1;
+            opacity: 0; /* Começa invisível */
+            visibility: hidden; /* Começa escondido */
+            transition: opacity 0.3s, visibility 0.3s;
+            white-space: nowrap; /* Impede que o texto quebre a linha */
+            pointer-events: none; /* O tooltip não interfere com o mouse */
+        }
+
+        /* Mostra o tooltip quando o mouse está sobre o container */
+        .tooltip-container:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Estilos do Pop-up */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none; /* Começa escondido */
+            z-index: 99;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none; /* Começa escondido */
+            z-index: 100;
+            text-align: center;
+        }
+
+        .popup.active, .popup-overlay.active {
+            display: block; /* Classe para mostrar os elementos */
+        }
+    </style>
+</head>
+<body>
+    <h2>Tooltip e pop-up Personalizado</h2>
+
+    <!-- Tooltp -->
+     <div class="tooltip-container">
+        <span class="icon-info">?</span>
+        <div class="tooltip">Use esse cartão para obter ajuda rápida</div>
+     </div>
+
+     <!-- botão para abrir pop-up -->
+      <button id="bntpopup" style="margin-top: 30px;">Abrir pop-up</button>
+
+      <!-- pop-up -->
+       <div class="popup-overlay" id="popup-overlay"></div>
+       <div class="popup" id="popup">
+            <h3>Ajuda rápida</h3>
+            <p>Este é um pop-up de exemplo com informações úteis.</p>
+            <button id="close-popup">Fechar</button>
+       </div>
+
+       <script>
+        // --- Lógica do Pop-up ---
+        const btnPopup = document.getElementById('bntpopup');
+        const popupOverlay = document.getElementById('popup-overlay');
+        const popup = document.getElementById('popup');
+        const closePopup = document.getElementById('close-popup');
+
+        function togglePopup() {
+            popupOverlay.classList.toggle('active');
+            popup.classList.toggle('active');
+        }
+
+        // Adiciona os eventos para abrir e fechar o pop-up
+        btnPopup.addEventListener('click', togglePopup);
+        closePopup.addEventListener('click', togglePopup);
+        popupOverlay.addEventListener('click', togglePopup);
+
+       </script>
+</body>
+</html>
