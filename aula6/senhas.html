@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<!-- gerador_senhas.html -->
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gerador de senhas aleatórias</title>
+
+</head>
+
+<body>
+
+    <h1>Gerador de Senhas Aleatórias</h1>
+
+   
+
+    <label for="tamanhoSenha">Tamanho da senha:</label>
+
+    <!-- Tamanho da senha -->
+
+    <input type="number" id="tamanhoSenha" value="12" min="4" max="64">
+
+    <!-- Botão para gerar a senha -->
+
+    <button id="gerarSenha">Gerar Senha</button>
+
+    <p id="senhaGerada" style="font-weight: bold; margin-top: 20px; color:blueviolet"></p>
+
+ 
+
+    <script>
+
+        // Lógica para gerar a senha aleatória
+
+        document.getElementById('gerarSenha').addEventListener('click', function() {
+
+           
+
+            const tamanho = parseInt(document.getElementById('tamanhoSenha').value);
+
+            // Todos os caracteres possíveis para a senha
+
+            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+
+            let senha = '';
+
+            // Gerar a senha aleatória através de um loop
+
+            for (let i = 0; i < tamanho; i++) {
+
+                // montar senha letra por letra
+
+                const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+
+                senha += caracteres.charAt(indiceAleatorio);
+
+            }
+
+            // Exibir a senha gerada na página
+
+            document.getElementById('senhaGerada').textContent = 'Senha Gerada: ' + senha;
+
+        });
+
+    </script>
+
+   
+
+</body>
+
+</html>
+
+
