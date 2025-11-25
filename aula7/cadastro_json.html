@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de cadastro de alunos gravando JSON com JS</title>
+</head>
+<body>
+    <h1>Cadastro de alunos</h1>
+    <!-- Bootstrap CSS/JS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header">Formulário de cadastro</div>
+                    <div class="card-body">
+                        <form id="formAluno" novalidate>
+                            <input type="hidden" id="idx" value="-1">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input id="nome" class="form-control" required>
+                                <div class="invalid-feedback">Nome é obrigatório.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input id="email" type="email" class="form-control" required>
+                                <div class="invalid-feedback">E-mail válido é obrigatório.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="curso" class="form-label">Curso</label>
+                                <input id="curso" class="form-control" required>
+                                <div class="invalid-feedback">Informe o curso.</div>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button id="btnSalvar" type="submit" class="btn btn-primary">Salvar</button>
+                                <button id="btnNovo" type="button" class="btn btn-outline-secondary">Novo</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="msg" class="alert d-none" role="alert"></div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">Lista de alunos</div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>Curso</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listaAlunos"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">JSON bruto</div>
+                    <div class="card-body">
+                        <textarea id="jsonArea" class="form-control" rows="6" readonly></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // SISTEMA DE CADASTRO DE ALUNOS COM PERSISTÊNCIA JSON
+        // ============================================
+        
+        // IIFE (Immediately Invoked Function Expression) - Executa imediatamente e isola o escopo
+        (() => {
+            // ============================================
+            // CONSTANTES E CONFIGURAÇÕES
+            // ============================================
+            
+            // Chave usada para armazenar no localStorage do navegador
+            const key = 'alunos';
+            
+            // Caminho do arquivo JSON físico que será usado para persistência
+            const jsonFilePath = './alunos.json';
+            
+            // Variável para armazenar o handle do arquivo (File System Access API)
+            let fileHandle = null;
+            
+            // ============================================
+            // SELEÇÃO DE ELEMENTOS DO DOM
+            // ============================================
+            
+            // Seleciona o formulário de cadastro
+            const form = document.getElementById('formAluno');
+            
+            // Seleciona os campos de entrada do formulário
+            const nomeEl = document.getElementById('nome');
+            const emailEl = document.getElementById('email');
+            const cursoEl = document.getElementById('curso');
+            const idxEl = document.getElementById('idx'); // Campo hidden que armazena o índice do aluno sendo editado
+            
+            // Seleciona o elemento onde a lista de alunos será renderizada
+            const listaEl = document.getElementById('listaAlunos');
+            
+            // Seleciona a textarea que exibe o JSON bruto
+            const jsonArea = document.getElementById('jsonArea');
+            
+            // Seleciona o elemento de mensagem de feedback
+            const msgEl = document.getElementById('msg');
+            
+            // ============================================
+            // VARIÁVEL DE ESTADO
+            // ============================================
+            
+            // Array que armazena todos os alunos cadastrados
+            let alunos = [];
+            
+            // ============================================
+            // FUNÇÕES AUXILIARES
+            // ============================================
+            
+            /**
+             * Exibe uma mensagem de feedback para o usuário
+             * @param {string} text - Texto da mensagem
+             * @param {string} type - Tipo da mensagem (success, danger, warning, info)
+             */
+            function showMsg(text, type = 'success') {
+                msgEl.textContent = text; // Define o texto da mensagem
+                msgEl.className = 'alert alert-' + type; // Aplica a classe Bootstrap correspondente ao tipo
+                // Remove a classe 'd-none' para tornar a mensagem visível
+                msgEl.classList.remove('d-none');
+                // Após 2.5 segundos, oculta a mensagem novamente
+                setTimeout(() => msgEl.classList.add('d-none'), 2500);
+            }
+            
+            /**
+             * Salva os dados no localStorage e atualiza a interface
+             * O localStorage persiste mesmo após fechar o navegador
+             */
+            function saveStorage() {
+                // Converte o array de alunos para string JSON e salva no localStorage
+                localStorage.setItem(key, JSON.stringify(alunos));
+                // Atualiza a interface após salvar
+                render();
+            }
+            
+            /**
+             * Carrega os dados do localStorage
+             * Se não houver dados ou ocorrer erro, inicia com array vazio
+             */
+            function loadStorage() {
+                try {
+                    // Tenta recuperar os dados do localStorage
+                    const raw = localStorage.getItem(key);
+                    // Se existir dados, converte de JSON para array, senão usa array vazio
+                    alunos = raw ? JSON.parse(raw) : [];
+                } catch (error) {
+                    // Se houver erro ao fazer parse, inicia com array vazio
+                    alunos = [];
+                    console.error('Erro ao carregar do localStorage:', error);
+                }
+            }
+            
+            /**
+             * Carrega os dados do arquivo JSON físico usando Fetch API
+             * Esta função tenta buscar o arquivo alunos.json do servidor
+             */
+            async function loadFromJSONFile() {
+                try {
+                    // Faz uma requisição HTTP GET para buscar o arquivo JSON
+                    const response = await fetch(jsonFilePath);
+                    
+                    // Verifica se a resposta foi bem-sucedida (status 200)
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP: ${response.status}`);
+                    }
+                    
+                    // Converte a resposta para texto e depois para objeto JavaScript
+                    const data = await response.json();
+                    
+                    // Verifica se os dados são um array válido
+                    if (Array.isArray(data)) {
+                        alunos = data; // Atualiza o array de alunos com os dados do arquivo
+                        // Salva também no localStorage como backup
+                        saveStorage();
+                        showMsg('Dados carregados do arquivo JSON.');
+                        return true;
+                    } else {
+                        throw new Error('Formato inválido: o JSON deve ser um array');
+                    }
+                } catch (error) {
+                    // Se não conseguir carregar do arquivo, tenta carregar do localStorage
+                    console.warn('Não foi possível carregar do arquivo JSON:', error);
+                    loadStorage(); // Fallback para localStorage
+                    return false;
+                }
+            }
+            
+            /**
+             * Salva os dados em um arquivo JSON físico usando File System Access API
+             * Permite salvar o arquivo diretamente na pasta do projeto
+             */
+            async function saveToJSONFile() {
+                try {
+                    // Converte o array de alunos para JSON formatado (com indentação de 2 espaços)
+                    const data = JSON.stringify(alunos, null, 2);
+                    
+                    // Verifica se a File System Access API está disponível (Chrome, Edge, etc.)
+                    if ('showSaveFilePicker' in window) {
+                        // Se já temos um handle de arquivo, usa ele diretamente (sem perguntar)
+                        if (fileHandle) {
+                            try {
+                                const writable = await fileHandle.createWritable();
+                                await writable.write(data);
+                                await writable.close();
+                                // Não mostra mensagem para não poluir a interface
+                                return;
+                            } catch (error) {
+                                // Se falhar (arquivo foi movido/deletado), tenta abrir novamente
+                                fileHandle = null;
+                            }
+                        }
+                        
+                        // Se não temos handle, tenta abrir o arquivo existente primeiro
+                        // Isso só pergunta uma vez e depois usa o handle salvo
+                        try {
+                            // Tenta abrir o arquivo alunos.json se existir
+                            fileHandle = await window.showOpenFilePicker({
+                                types: [{
+                                    description: 'Arquivo JSON',
+                                    accept: { 'application/json': ['.json'] }
+                                }],
+                                multiple: false
+                            });
+                            fileHandle = fileHandle[0]; // showOpenFilePicker retorna array
+                            
+                            // Salva usando o handle obtido
+                            const writable = await fileHandle.createWritable();
+                            await writable.write(data);
+                            await writable.close();
+                            showMsg('Arquivo JSON salvo com sucesso!');
+                        } catch (error) {
+                            // Se não conseguir abrir (arquivo não existe ou usuário cancelou),
+                            // cria um novo arquivo
+                            if (error.name === 'AbortError') {
+                                // Usuário cancelou, não faz nada
+                                return;
+                            }
+                            
+                            // Tenta criar novo arquivo
+                            try {
+                                fileHandle = await window.showSaveFilePicker({
+                                    suggestedName: 'alunos.json',
+                                    types: [{
+                                        description: 'Arquivo JSON',
+                                        accept: { 'application/json': ['.json'] }
+                                    }]
+                                });
+                                
+                                const writable = await fileHandle.createWritable();
+                                await writable.write(data);
+                                await writable.close();
+                                showMsg('Arquivo JSON criado com sucesso!');
+                            } catch (saveError) {
+                                if (saveError.name !== 'AbortError') {
+                                    throw saveError;
+                                }
+                            }
+                        }
+                    } else {
+                        // Fallback para navegadores que não suportam File System Access API
+                        // Cria um blob e faz download tradicional
+                        const blob = new Blob([data], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'alunos.json';
+                        a.style.display = 'none';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        showMsg('Arquivo JSON baixado (use Chrome/Edge para salvar na pasta do projeto).');
+                    }
+                } catch (error) {
+                    console.error('Erro ao salvar arquivo JSON:', error);
+                    showMsg('Erro ao salvar arquivo JSON: ' + error.message, 'danger');
+                }
+            }
+            
+            /**
+             * Renderiza a lista de alunos na tabela e atualiza o JSON bruto
+             */
+            function render() {
+                // Limpa o conteúdo atual da tabela
+                listaEl.innerHTML = '';
+                
+                // Para cada aluno no array, cria uma linha na tabela
+                alunos.forEach((a, i) => {
+                    // Cria um elemento <tr> (table row)
+                    const tr = document.createElement('tr');
+                    
+                    // Define o HTML interno da linha com os dados do aluno
+                    // escapeHtml() previne ataques XSS (Cross-Site Scripting)
+                    tr.innerHTML = `
+                        <td>${i + 1}</td> <!-- Número sequencial (começa em 1) -->
+                        <td>${escapeHtml(a.nome)}</td> <!-- Nome do aluno (protegido contra XSS) -->
+                        <td>${escapeHtml(a.email)}</td> <!-- Email do aluno -->
+                        <td>${escapeHtml(a.curso)}</td> <!-- Curso do aluno -->
+                        <td class="text-end"> <!-- Botões de ação alinhados à direita -->
+                            <button class="btn btn-sm btn-outline-primary me-1" data-action="edit" data-i="${i}">Editar</button>
+                            <button class="btn btn-sm btn-outline-danger" data-action="del" data-i="${i}">Excluir</button>
+                        </td>
+                    `;
+                    
+                    // Adiciona a linha à tabela
+                    listaEl.appendChild(tr);
+                });
+                
+                // Atualiza a textarea com o JSON formatado dos alunos
+                jsonArea.value = JSON.stringify(alunos, null, 2);
+            }
+            
+            /**
+             * Escapa caracteres HTML especiais para prevenir XSS
+             * @param {string} s - String a ser escapada
+             * @returns {string} - String com caracteres HTML escapados
+             */
+            function escapeHtml(s = '') {
+                // Substitui caracteres perigosos por suas entidades HTML
+                return s.replace(/[&<>"']/g, c => ({
+                    '&': '&amp;',   // & vira &amp;
+                    '<': '&lt;',    // < vira &lt;
+                    '>': '&gt;',    // > vira &gt;
+                    '"': '&quot;',  // " vira &quot;
+                    "'": '&#39;'    // ' vira &#39;
+                })[c]);
+            }
+            
+            // ============================================
+            // EVENT LISTENERS - FORMULÁRIO
+            // ============================================
+            
+            /**
+             * Evento de submit do formulário
+             * Executado quando o usuário clica em "Salvar"
+             */
+            form.addEventListener('submit', async e => {
+                // Previne o comportamento padrão do formulário (recarregar a página)
+                e.preventDefault();
+                
+                // Valida o formulário usando a validação HTML5 nativa
+                if (!form.checkValidity()) {
+                    // Se inválido, adiciona a classe 'was-validated' do Bootstrap
+                    // Isso faz com que as mensagens de erro apareçam
+                    form.classList.add('was-validated');
+                    return; // Interrompe a execução
+                }
+                
+                // Obtém os valores dos campos, removendo espaços em branco no início e fim
+                const nome = nomeEl.value.trim();
+                const email = emailEl.value.trim();
+                const curso = cursoEl.value.trim();
+                
+                // Obtém o índice do aluno sendo editado (-1 significa novo aluno)
+                const idx = parseInt(idxEl.value, 10);
+                
+                // Verifica se está editando um aluno existente ou criando um novo
+                if (idx >= 0) {
+                    // EDITANDO: Substitui o aluno no índice especificado
+                    alunos[idx] = { nome, email, curso };
+                    showMsg('Aluno atualizado.');
+                } else {
+                    // CRIANDO: Adiciona um novo aluno ao final do array
+                    alunos.push({ nome, email, curso });
+                    showMsg('Aluno adicionado.');
+                }
+                
+                // Reseta o formulário para o modo de criação
+                idxEl.value = -1;
+                form.reset(); // Limpa todos os campos
+                form.classList.remove('was-validated'); // Remove as mensagens de validação
+                
+                // Salva no localStorage e atualiza a interface
+                saveStorage();
+                
+                // Salva também no arquivo JSON físico
+                await saveToJSONFile();
+            });
+            
+            /**
+             * Evento do botão "Novo"
+             * Limpa o formulário para cadastrar um novo aluno
+             */
+            document.getElementById('btnNovo').addEventListener('click', () => {
+                idxEl.value = -1; // Reseta o índice (modo criação)
+                form.reset(); // Limpa os campos
+                form.classList.remove('was-validated'); // Remove mensagens de validação
+            });
+            
+            // ============================================
+            // EVENT LISTENERS - LISTA DE ALUNOS
+            // ============================================
+            
+            /**
+             * Evento de clique na lista de alunos (delegação de eventos)
+             * Usa delegação para capturar cliques nos botões de editar/excluir
+             */
+            listaEl.addEventListener('click', async e => {
+                // Encontra o botão mais próximo do elemento clicado
+                const btn = e.target.closest('button');
+                if (!btn) return; // Se não for um botão, ignora
+                
+                // Obtém o índice do aluno a partir do atributo data-i
+                const i = parseInt(btn.dataset.i, 10);
+                
+                // Verifica qual ação foi solicitada
+                if (btn.dataset.action === 'edit') {
+                    // AÇÃO: EDITAR
+                    const a = alunos[i]; // Obtém os dados do aluno
+                    
+                    // Preenche o formulário com os dados do aluno
+                    nomeEl.value = a.nome;
+                    emailEl.value = a.email;
+                    cursoEl.value = a.curso;
+                    idxEl.value = i; // Define o índice para indicar que está editando
+                    
+                    // Rola a página suavemente para o topo (onde está o formulário)
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                } else if (btn.dataset.action === 'del') {
+                    // AÇÃO: EXCLUIR
+                    // Pede confirmação antes de excluir
+                    if (confirm('Excluir este aluno?')) {
+                        // Remove o aluno do array usando splice
+                        // splice(i, 1) remove 1 elemento a partir do índice i
+                        alunos.splice(i, 1);
+                        
+                        // Salva as alterações
+                        saveStorage();
+                        // Salva também no arquivo JSON físico
+                        await saveToJSONFile();
+                        showMsg('Aluno excluído.', 'warning');
+                    }
+                }
+            });
+            
+            // ============================================
+            // INICIALIZAÇÃO
+            // ============================================
+            
+            /**
+             * Função de inicialização
+             * Carrega os dados e renderiza a interface
+             */
+            async function init() {
+                // Tenta carregar do arquivo JSON físico primeiro
+                const loadedFromFile = await loadFromJSONFile();
+                
+                // Se não conseguiu carregar do arquivo, carrega do localStorage
+                if (!loadedFromFile) {
+                    loadStorage();
+                }
+                
+                // Renderiza a interface com os dados carregados
+                render();
+            }
+            
+            // Executa a inicialização quando o script é carregado
+            init();
+        })();
+        </script>
+
+</body>
+</html>

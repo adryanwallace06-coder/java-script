@@ -1,0 +1,22 @@
+[
+  {
+    "nome": "maria José",
+    "email": "mj@hotmail",
+    "curso": "Javascript"
+  },
+  {
+    "nome": "José",
+    "email": "jose@hotmail",
+    "curso": "php"
+  },
+  {
+    "nome": "Adryzzin",
+    "email": "Adryan@eu",
+    "curso": "Js"
+  },
+  {
+    "nome": "Adryzzin121",
+    "email": "Adryan@eu212",
+    "curso": "Php"
+  }
+]
